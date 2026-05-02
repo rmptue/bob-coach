@@ -1,0 +1,81 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🎯 Bob Coach Report                                                          │
+│ Session: phase-4a-renderer-polish.md                                         │
+│ Cost: $1.76 | Turns: 44 | Duration: 20m                                      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+                       📊 Metrics Summary                       
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┓
+┃ Metric                    ┃    Target ┃    Actual ┃  Status  ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━┩
+│ Plan-to-Code Ratio        │      >20% │     37.5% │  ✓ Pass  │
+│ Bobcoin Efficiency        │   >5/$0.1 │  1.5/$0.1 │  ✗ Fail  │
+│ Conversation Count        │       <15 │        22 │  ✗ Fail  │
+│ Slash Command Usage       │      >30% │      0.0% │  ✗ Fail  │
+│ Error Rate                │      <10% │      6.8% │  ✓ Pass  │
+└───────────────────────────┴───────────┴───────────┴──────────┘
+
+⚠️  Anti-Patterns Detected (5)
+
+[1m▲ [CRITICAL] Cost-Based Drift (Single Turn)[0m
+  Evidence:
+    • Turn 12: $0.34 cost increase
+    • Turn 14: $0.41 cost increase
+    • Turn 16: $0.48 cost increase
+    • Turn 18: $0.56 cost increase
+    • Turn 20: $0.64 cost increase
+    • Turn 22: $0.73 cost increase
+    • Turn 24: $0.81 cost increase
+    • Turn 26: $0.90 cost increase
+    • Turn 28: $1.00 cost increase
+    • Turn 30: $1.10 cost increase
+    • Turn 32: $1.20 cost increase
+    • Turn 34: $1.31 cost increase
+    • Turn 36: $1.42 cost increase
+    • Turn 38: $1.53 cost increase
+    • Turn 40: $1.64 cost increase
+    • Turn 42: $1.76 cost increase
+  Recommendation:
+    High cost suggests unfocused task or missing decomposition.
+    Break work into smaller phases. Use '/review' to checkpoint
+    progress. Consider switching to Plan mode to refine
+    approach.
+
+[1m▲ [CRITICAL] Cost-Based Drift (Session)[0m
+  Evidence:
+    • Total session cost: $1.76 across 44 turns
+    • Note: Session contains negative cost deltas (missing environment blocks)
+  Recommendation:
+    High session cost suggests unfocused work or missing phase
+    breaks. Export session history and start a new focused
+    session for the next phase.
+
+[HIGH] Missing Plan File
+  Evidence:
+    • 16 Code mode turns detected (turns 12-42)
+    • No plan files found in visible files or open tabs
+  Recommendation:
+    Create PLAN.md or TODO.md before starting Code mode. Use
+    'update_todo_list' tool or switch to Plan mode with '/plan'
+    to document your approach before coding.
+
+[HIGH] Tool Use Errors
+  Evidence:
+    • Turn 2: [ERROR] after read_file in Turn 1
+  Recommendation:
+    Tool errors indicate unclear requirements or incorrect
+    parameters. Review tool documentation and task context
+    before retrying. Use 'ask_followup_question' if requirements
+    are ambiguous.
+
+[MEDIUM] Missing /review Command
+  Evidence:
+    • 6 file edits detected (insert_content: 1, apply_diff: 5)
+    • No /review command found in user messages
+  Recommendation:
+    Run '/review' after making >5 file changes to catch bugs
+    early. Code review reduces rework and improves quality.
+
+✅ Session Score: 7/100
+   2/5 metrics passing | 5 anti-patterns detected
+
