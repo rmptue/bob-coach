@@ -1,0 +1,41 @@
+﻿Γò¡ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò«
+Γöé ≡ƒÄ» Bob Coach Report                                                                                                  Γöé
+Γöé Session: sample-session-02.md                                                                                        Γöé
+Γöé Cost: $0.37 | Turns: 18 | Duration: 11m                                                                              Γöé
+Γò░ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓò»
+
+                       ≡ƒôè Metrics Summary                       
+ΓöÅΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö│ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö│ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö│ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöô
+Γöâ Metric                    Γöâ    Target Γöâ    Actual Γöâ  Status  Γöâ
+ΓöíΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓòçΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓòçΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓòçΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓö⌐
+Γöé Plan-to-Code Ratio        Γöé      >20% Γöé    100.0% Γöé  Γ£ô Pass  Γöé
+Γöé Bobcoin Efficiency        Γöé   >5/$0.1 Γöé  1.6/$0.1 Γöé  Γ£ù Fail  Γöé
+Γöé Conversation Count        Γöé       <15 Γöé         9 Γöé  Γ£ô Pass  Γöé
+Γöé Slash Command Usage       Γöé      >30% Γöé      0.0% Γöé  Γ£ù Fail  Γöé
+Γöé Error Rate                Γöé      <10% Γöé     11.1% Γöé  Γ£ù Fail  Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ
+
+ΓÜá∩╕Å  Anti-Patterns Detected (2)
+
+[CRITICAL] Cost-Based Drift (Single Turn)
+  Evidence:
+    ΓÇó Turn 14: $0.31 cost increase
+    ΓÇó Turn 16: $0.37 cost increase
+  Recommendation:
+    High cost suggests unfocused task or missing decomposition.
+    Break work into smaller phases. Use '/review' to checkpoint
+    progress. Consider switching to Plan mode to refine
+    approach.
+
+[HIGH] Tool Use Errors
+  Evidence:
+    ΓÇó Turn 2: [ERROR] after read_file in Turn 1
+  Recommendation:
+    Tool errors indicate unclear requirements or incorrect
+    parameters. Review tool documentation and task context
+    before retrying. Use 'ask_followup_question' if requirements
+    are ambiguous.
+
+Γ£à Session Score: 25/100
+   2/5 metrics passing | 2 anti-patterns detected
+

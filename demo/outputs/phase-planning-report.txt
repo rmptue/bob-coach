@@ -1,0 +1,47 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🎯 Bob Coach Report                                                          │
+│ Session: phase-planning.md                                                   │
+│ Cost: $0.78 | Turns: 28 | Duration: 20m                                      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+                       📊 Metrics Summary                       
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┓
+┃ Metric                    ┃    Target ┃    Actual ┃  Status  ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━┩
+│ Plan-to-Code Ratio        │      >20% │    100.0% │  ✓ Pass  │
+│ Bobcoin Efficiency        │   >5/$0.1 │  1.2/$0.1 │  ✗ Fail  │
+│ Conversation Count        │       <15 │        14 │  ✓ Pass  │
+│ Slash Command Usage       │      >30% │      0.0% │  ✗ Fail  │
+│ Error Rate                │      <10% │     21.4% │  ✗ Fail  │
+└───────────────────────────┴───────────┴───────────┴──────────┘
+
+⚠️  Anti-Patterns Detected (2)
+
+[1m▲ [CRITICAL] Cost-Based Drift (Single Turn)[0m
+  Evidence:
+    • Turn 14: $0.31 cost increase
+    • Turn 16: $0.37 cost increase
+    • Turn 18: $0.44 cost increase
+    • Turn 20: $0.52 cost increase
+    • Turn 22: $0.60 cost increase
+    • Turn 24: $0.69 cost increase
+    • Turn 26: $0.78 cost increase
+  Recommendation:
+    High cost suggests unfocused task or missing decomposition.
+    Break work into smaller phases. Use '/review' to checkpoint
+    progress. Consider switching to Plan mode to refine
+    approach.
+
+[HIGH] Tool Use Errors
+  Evidence:
+    • Turn 2: [ERROR] after read_file in Turn 1
+    • Turn 18: [ERROR] after ask_followup_question in Turn 17
+  Recommendation:
+    Tool errors indicate unclear requirements or incorrect
+    parameters. Review tool documentation and task context
+    before retrying. Use 'ask_followup_question' if requirements
+    are ambiguous.
+
+✅ Session Score: 25/100
+   2/5 metrics passing | 2 anti-patterns detected
+

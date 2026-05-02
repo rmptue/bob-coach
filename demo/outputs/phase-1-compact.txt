@@ -1,0 +1,32 @@
+╭──────────────────────────────────────────────────────────────────────────────╮
+│ 🎯 Bob Coach Report                                                          │
+│ Session: phase-1.md                                                          │
+│ Cost: $5.80 | Turns: 80 | Duration: 17m                                      │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+                       📊 Metrics Summary                       
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━┓
+┃ Metric                    ┃    Target ┃    Actual ┃  Status  ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━┩
+│ Plan-to-Code Ratio        │      >20% │     37.9% │  ✓ Pass  │
+│ Bobcoin Efficiency        │   >5/$0.1 │  0.8/$0.1 │  ✗ Fail  │
+│ Conversation Count        │       <15 │        40 │  ✗ Fail  │
+│ Slash Command Usage       │      >30% │      0.0% │  ✗ Fail  │
+│ Error Rate                │      <10% │     22.5% │  ✗ Fail  │
+└───────────────────────────┴───────────┴───────────┴──────────┘
+
+⚠️  Anti-Patterns Detected (5)
+
+[1m▲ [CRITICAL] Cost-Based Drift (Single Turn)[0m
+
+[1m▲ [CRITICAL] Cost-Based Drift (Session)[0m
+
+[HIGH] Missing Plan File
+
+[HIGH] Tool Use Errors
+
+[MEDIUM] Missing /review Command
+
+✅ Session Score: 0/100
+   1/5 metrics passing | 5 anti-patterns detected
+

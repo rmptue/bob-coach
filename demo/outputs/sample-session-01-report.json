@@ -1,0 +1,60 @@
+﻿{
+  "version": "1.0.0",
+  "session_metadata": {
+    "filename": "sample-session-01.md",
+    "total_cost": 0.03,
+    "turn_count": 4,
+    "user_turns": 2,
+    "assistant_turns": 2,
+    "duration_minutes": 0,
+    "workspace": "C:/Users/Joshua/Desktop",
+    "modes_used": [
+      "plan"
+    ]
+  },
+  "metrics": {
+    "plan_to_code_ratio": {
+      "value": 100.0,
+      "target": 20.0,
+      "unit": "percent",
+      "pass": true
+    },
+    "bobcoin_efficiency": {
+      "value": 3.3,
+      "target": 5.0,
+      "unit": "deliverables_per_0.1_dollars",
+      "pass": false
+    },
+    "conversation_count": {
+      "value": 2,
+      "target": 15,
+      "unit": "turns",
+      "pass": true
+    },
+    "slash_command_usage": {
+      "value": 0.0,
+      "target": 30.0,
+      "unit": "percent",
+      "pass": false
+    },
+    "error_rate": {
+      "value": 25.0,
+      "target": 10.0,
+      "unit": "percent",
+      "pass": false
+    }
+  },
+  "anti_patterns": [],
+  "summary": {
+    "overall_score": 40,
+    "passing_metrics_count": 2,
+    "total_metrics_count": 5,
+    "anti_pattern_count_by_severity": {
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0
+    },
+    "total_anti_patterns": 0
+  }
+}
