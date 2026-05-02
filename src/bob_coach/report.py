@@ -40,7 +40,8 @@ def render_terminal_report(
     session: Session,
     metrics: dict[str, dict[str, float | int | bool | str]],
     anti_patterns: list[AntiPattern],
-    session_filename: str
+    session_filename: str,
+    compact: bool = False
 ) -> str:
     """Render coaching report for terminal display using Rich library.
     
@@ -49,6 +50,7 @@ def render_terminal_report(
         metrics: Calculated metrics from calculate_all_metrics()
         anti_patterns: List of detected anti-patterns
         session_filename: Name of the session file being analyzed
+        compact: If True, render compact mode (~40 lines) for demo videos
         
     Returns:
         Formatted string with Rich markup for terminal display
@@ -140,26 +142,39 @@ def render_terminal_report(
             
             for pattern in patterns:
                 color = severity_colors[severity]
-                console.print(f"[{color}][{severity.upper()}] {pattern.name}[/{color}]")
                 
-                # Evidence
-                console.print("  Evidence:")
-                for evidence in pattern.evidence:
-                    console.print(f"    [dim white]• {evidence}[/dim white]")
+                # Add ANSI bold and ▲ marker for CRITICAL patterns
+                if severity == "critical":
+                    # ANSI escape codes: \033[1m = bold, \033[0m = reset
+                    prefix = "\033[1m▲ "
+                    suffix = "\033[0m"
+                    console.print(f"{prefix}[{color}][{severity.upper()}] {pattern.name}[/{color}]{suffix}")
+                else:
+                    console.print(f"[{color}][{severity.upper()}] {pattern.name}[/{color}]")
                 
-                # Recommendation (wrapped at 60 chars, indented)
-                console.print("  Recommendation:")
-                # Simple word wrapping
-                words = pattern.recommendation.split()
-                line = "    "
-                for word in words:
-                    if len(line) + len(word) + 1 > 64:
+                if compact:
+                    # Compact mode: no evidence or recommendation, just the pattern name
+                    pass
+                else:
+                    # Full mode: show all evidence and recommendation
+                    # Evidence
+                    console.print("  Evidence:")
+                    for evidence in pattern.evidence:
+                        console.print(f"    [dim white]• {evidence}[/dim white]")
+                    
+                    # Recommendation (wrapped at 60 chars, indented)
+                    console.print("  Recommendation:")
+                    # Simple word wrapping
+                    words = pattern.recommendation.split()
+                    line = "    "
+                    for word in words:
+                        if len(line) + len(word) + 1 > 64:
+                            console.print(f"[white]{line}[/white]")
+                            line = "    " + word
+                        else:
+                            line += (" " if line != "    " else "") + word
+                    if line.strip():
                         console.print(f"[white]{line}[/white]")
-                        line = "    " + word
-                    else:
-                        line += (" " if line != "    " else "") + word
-                if line.strip():
-                    console.print(f"[white]{line}[/white]")
                 
                 console.print()
     else:

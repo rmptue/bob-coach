@@ -413,4 +413,165 @@ def test_json_report_with_anti_patterns(sample_01_session):
     assert data["summary"]["anti_pattern_count_by_severity"]["medium"] == 1
 
 
+def test_renderer_compact_mode_under_40_lines(sample_01_session):
+    """Test that compact mode renders under 40 lines."""
+    metrics = calculate_all_metrics(sample_01_session)
+    
+    # Create 5 anti-patterns (mix of severities)
+    findings = [
+        AntiPattern(
+            name="Cost-Based Drift (Single Turn)",
+            severity="critical",
+            description="High single-turn cost",
+            evidence=[f"Turn {i}: ${0.30 + i*0.1:.2f} cost increase" for i in range(36)],
+            recommendation="Break work into smaller phases."
+        ),
+        AntiPattern(
+            name="Cost-Based Drift (Session)",
+            severity="critical",
+            description="High session cost",
+            evidence=["Total session cost: $5.80 across 80 turns"],
+            recommendation="Export session history and start new session."
+        ),
+        AntiPattern(
+            name="Missing Plan File",
+            severity="high",
+            description="Code mode without plan",
+            evidence=["29 Code mode turns detected", "No plan files found"],
+            recommendation="Create PLAN.md before coding."
+        ),
+        AntiPattern(
+            name="Tool Use Errors",
+            severity="high",
+            description="Tool errors detected",
+            evidence=[f"Turn {i}: [ERROR]" for i in range(8)],
+            recommendation="Review tool documentation."
+        ),
+        AntiPattern(
+            name="Missing /review Command",
+            severity="medium",
+            description="No review after edits",
+            evidence=["16 file edits detected", "No /review command found"],
+            recommendation="Run '/review' after >5 file changes."
+        ),
+    ]
+    
+    report = render_terminal_report(
+        sample_01_session, metrics, findings, "test.md", compact=True
+    )
+    
+    line_count = len(report.split('\n'))
+    assert line_count <= 40, f"Compact mode should be ≤40 lines, got {line_count}"
+
+
+def test_renderer_compact_preserves_critical_anti_patterns(sample_01_session):
+    """Test that compact mode preserves all anti-pattern names but drops evidence."""
+    metrics = calculate_all_metrics(sample_01_session)
+    
+    findings = [
+        AntiPattern(
+            name="Critical Pattern 1",
+            severity="critical",
+            description="Test",
+            evidence=["Evidence line 1", "Evidence line 2", "Evidence line 3"],
+            recommendation="Fix it"
+        ),
+        AntiPattern(
+            name="Critical Pattern 2",
+            severity="critical",
+            description="Test",
+            evidence=["More evidence"],
+            recommendation="Fix it"
+        ),
+        AntiPattern(
+            name="High Pattern",
+            severity="high",
+            description="Test",
+            evidence=["High evidence"],
+            recommendation="Fix it"
+        ),
+        AntiPattern(
+            name="Medium Pattern",
+            severity="medium",
+            description="Test",
+            evidence=["Medium evidence"],
+            recommendation="Fix it"
+        ),
+    ]
+    
+    report = render_terminal_report(
+        sample_01_session, metrics, findings, "test.md", compact=True
+    )
+    
+    # All pattern names should be present
+    assert "Critical Pattern 1" in report
+    assert "Critical Pattern 2" in report
+    assert "High Pattern" in report
+    assert "Medium Pattern" in report
+    
+    # Evidence lists should NOT be present
+    assert "Evidence:" not in report
+    assert "Evidence line 1" not in report
+    assert "More evidence" not in report
+    
+    # Recommendation section should NOT be present
+    assert "Recommendation:" not in report
+
+
+def test_renderer_critical_anti_patterns_have_visual_marker(sample_01_session):
+    """Test that CRITICAL anti-patterns have bold ANSI codes and ▲ marker."""
+    metrics = calculate_all_metrics(sample_01_session)
+    
+    findings = [
+        AntiPattern(
+            name="Critical Pattern",
+            severity="critical",
+            description="Test critical",
+            evidence=["Evidence"],
+            recommendation="Fix"
+        ),
+        AntiPattern(
+            name="High Pattern",
+            severity="high",
+            description="Test high",
+            evidence=["Evidence"],
+            recommendation="Fix"
+        ),
+    ]
+    
+    # Test full mode
+    report_full = render_terminal_report(
+        sample_01_session, metrics, findings, "test.md", compact=False
+    )
+    
+    # CRITICAL should have ANSI bold codes
+    assert "\033[1m" in report_full, "CRITICAL pattern should have ANSI bold"
+    assert "\033[0m" in report_full, "CRITICAL pattern should have ANSI reset"
+    
+    # CRITICAL should have ▲ marker
+    assert "▲" in report_full, "CRITICAL pattern should have ▲ marker"
+    
+    # Check that marker appears before CRITICAL pattern name
+    critical_index = report_full.find("Critical Pattern")
+    marker_index = report_full.find("▲")
+    assert marker_index < critical_index, "▲ marker should appear before CRITICAL pattern name"
+    
+    # HIGH pattern should NOT have ▲ marker before its name
+    high_index = report_full.find("High Pattern")
+    # Find all marker positions
+    marker_positions = [i for i in range(len(report_full)) if report_full[i:i+1] == "▲"]
+    # None should be immediately before HIGH pattern
+    for pos in marker_positions:
+        assert abs(pos - high_index) > 10, "HIGH pattern should not have ▲ marker nearby"
+    
+    # Test compact mode
+    report_compact = render_terminal_report(
+        sample_01_session, metrics, findings, "test.md", compact=True
+    )
+    
+    # Same checks for compact mode
+    assert "\033[1m" in report_compact, "CRITICAL pattern should have ANSI bold in compact mode"
+    assert "▲" in report_compact, "CRITICAL pattern should have ▲ marker in compact mode"
+
+
 # Made with Bob
