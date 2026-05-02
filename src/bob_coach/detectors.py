@@ -426,3 +426,67 @@ def detect_plan_mode_violations(session: Session) -> list[AntiPattern]:
 
 
 # Made with Bob
+
+def detect_repeated_file_reads(session: Session) -> list[AntiPattern]:
+    """Detect files read 3+ times in a session (suggests context loss).
+    
+    Rule: Same file path appears in read_file tool uses ≥3 times across session.
+    
+    Parameter structure verified from phase-1.md parsing:
+    - read_file stores content in parameters['args']
+    - args contains nested XML: <file><path>filename</path></file>
+    - Multiple files can be in single read_file call
+    
+    Args:
+        session: Parsed session object from Phase 1
+        
+    Returns:
+        List of AntiPattern findings (empty if no issues detected)
+    """
+    import re
+    
+    findings = []
+    
+    # Count file reads across all turns
+    file_read_counts: dict[str, int] = {}
+    
+    for turn in session.turns:
+        if turn.speaker == "assistant":
+            for tool in turn.tool_uses:
+                if tool.name == "read_file":
+                    # Extract file paths from nested XML in args parameter
+                    args_content = tool.parameters.get("args", "")
+                    
+                    # Find all <path>...</path> tags
+                    for match in re.finditer(r'<path>(.+?)</path>', args_content):
+                        file_path = match.group(1)
+                        file_read_counts[file_path] = file_read_counts.get(file_path, 0) + 1
+    
+    # Find files read 3+ times
+    repeated_files = {path: count for path, count in file_read_counts.items() if count >= 3}
+    
+    if repeated_files:
+        # Sort by count (descending) for evidence
+        sorted_files = sorted(repeated_files.items(), key=lambda x: -x[1])
+        
+        evidence = [
+            f"{path}: {count} reads"
+            for path, count in sorted_files
+        ]
+        
+        findings.append(AntiPattern(
+            name="Repeated File Reads",
+            severity="medium",
+            description=f"{len(repeated_files)} file(s) read 3+ times in session",
+            evidence=evidence,
+            recommendation=(
+                "Cache file context. Re-reading suggests context loss between turns. "
+                "Consider using read_file with line ranges for targeted updates, or "
+                "reference previous reads in your prompts to maintain context."
+            )
+        ))
+    
+    return findings
+
+
+# Made with Bob

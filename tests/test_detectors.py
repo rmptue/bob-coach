@@ -13,6 +13,7 @@ from bob_coach.detectors import (
     detect_conversation_loops,
     detect_mode_thrashing,
     detect_plan_mode_violations,
+    detect_repeated_file_reads,
 )
 from bob_coach.models import (
     Session, Turn, ToolUse, ModeTransition, 
@@ -471,6 +472,99 @@ def test_cost_drift_with_negative_deltas_note():
         for f in session_findings 
         for ev in f.evidence
     )
+
+
+# Made with Bob
+
+# Test 19: Repeated File Reads - Positive case (4 reads)
+def test_repeated_file_reads_detected():
+    """Files read 4 times should be flagged."""
+    session = Session(
+        turns=[
+            Turn(
+                index=i,
+                speaker="assistant",
+                content="",
+                mode="code",
+                cost_delta=0.01,
+                cumulative_cost=0.01 * (i + 1),
+                timestamp=None,
+                tool_uses=[
+                    ToolUse(
+                        name="read_file",
+                        parameters={"args": "<file>\n<path>src/main.py</path>\n</file>"},
+                        turn_index=i
+                    )
+                ]
+            )
+            for i in range(4)
+        ]
+    )
+    
+    findings = detect_repeated_file_reads(session)
+    assert len(findings) == 1
+    assert findings[0].name == "Repeated File Reads"
+    assert findings[0].severity == "medium"
+    assert "src/main.py: 4 reads" in findings[0].evidence[0]
+
+
+# Test 20: Repeated File Reads - Negative case (2 reads)
+def test_repeated_file_reads_not_detected():
+    """Files read only 2 times should NOT be flagged."""
+    session = Session(
+        turns=[
+            Turn(
+                index=i,
+                speaker="assistant",
+                content="",
+                mode="code",
+                cost_delta=0.01,
+                cumulative_cost=0.01 * (i + 1),
+                timestamp=None,
+                tool_uses=[
+                    ToolUse(
+                        name="read_file",
+                        parameters={"args": "<file>\n<path>src/utils.py</path>\n</file>"},
+                        turn_index=i
+                    )
+                ]
+            )
+            for i in range(2)
+        ]
+    )
+    
+    findings = detect_repeated_file_reads(session)
+    assert len(findings) == 0
+
+
+# Test 21: Repeated File Reads - Edge case (exactly 3 reads)
+def test_repeated_file_reads_threshold():
+    """Files read exactly 3 times should be flagged (boundary test)."""
+    session = Session(
+        turns=[
+            Turn(
+                index=i,
+                speaker="assistant",
+                content="",
+                mode="code",
+                cost_delta=0.01,
+                cumulative_cost=0.01 * (i + 1),
+                timestamp=None,
+                tool_uses=[
+                    ToolUse(
+                        name="read_file",
+                        parameters={"args": "<file>\n<path>config.json</path>\n</file>"},
+                        turn_index=i
+                    )
+                ]
+            )
+            for i in range(3)
+        ]
+    )
+    
+    findings = detect_repeated_file_reads(session)
+    assert len(findings) == 1
+    assert "config.json: 3 reads" in findings[0].evidence[0]
 
 
 # Made with Bob

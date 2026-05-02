@@ -14,6 +14,7 @@ from bob_coach.detectors import (
     detect_conversation_loops,
     detect_mode_thrashing,
     detect_plan_mode_violations,
+    detect_repeated_file_reads,
 )
 from bob_coach.metrics import calculate_all_metrics
 from bob_coach.report import render_terminal_report, render_json_report
@@ -32,8 +33,14 @@ from bob_coach.report import render_terminal_report, render_json_report
     type=click.Path(),
     help="Output file path (default: stdout)",
 )
+@click.option(
+    "--compact",
+    is_flag=True,
+    default=False,
+    help="Compact terminal output (~40 lines, for demo videos)",
+)
 @click.version_option(version=__version__)
-def main(session_file: str, format: str, output: str | None) -> None:
+def main(session_file: str, format: str, output: str | None, compact: bool) -> None:
     """Analyze IBM Bob session exports for anti-patterns and metrics."""
     try:
         # 1. Parse session
@@ -49,6 +56,7 @@ def main(session_file: str, format: str, output: str | None) -> None:
             detect_conversation_loops,
             detect_mode_thrashing,
             detect_plan_mode_violations,
+            detect_repeated_file_reads,
         ]
         for detector in detectors:
             all_findings.extend(detector(session))
@@ -58,7 +66,7 @@ def main(session_file: str, format: str, output: str | None) -> None:
         
         # 4. Render report
         if format.lower() == "terminal":
-            report = render_terminal_report(session, metrics, all_findings, session_file)
+            report = render_terminal_report(session, metrics, all_findings, session_file, compact=compact)
         else:
             report = render_json_report(session, metrics, all_findings, session_file)
         
