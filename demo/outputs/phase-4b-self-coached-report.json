@@ -1,0 +1,143 @@
+{
+  "version": "1.0.0",
+  "session_metadata": {
+    "filename": "phase-4b-self-coached.md",
+    "total_cost": 3.81,
+    "turn_count": 68,
+    "user_turns": 34,
+    "assistant_turns": 34,
+    "duration_minutes": 8,
+    "workspace": "c:/Users/Joshua/Documents/VANTAGE/Projects/bob-coach",
+    "modes_used": [
+      "plan",
+      "code"
+    ]
+  },
+  "metrics": {
+    "plan_to_code_ratio": {
+      "value": 30.8,
+      "target": 20.0,
+      "unit": "percent",
+      "pass": true
+    },
+    "bobcoin_efficiency": {
+      "value": 0.9,
+      "target": 5.0,
+      "unit": "deliverables_per_0.1_dollars",
+      "pass": false
+    },
+    "conversation_count": {
+      "value": 34,
+      "target": 15,
+      "unit": "turns",
+      "pass": false
+    },
+    "slash_command_usage": {
+      "value": 0.0,
+      "target": 30.0,
+      "unit": "percent",
+      "pass": false
+    },
+    "error_rate": {
+      "value": 8.8,
+      "target": 10.0,
+      "unit": "percent",
+      "pass": true
+    }
+  },
+  "anti_patterns": [
+    {
+      "name": "Missing Plan File",
+      "severity": "high",
+      "description": "Code mode session without PLAN.md, TODO.md, or AGENTS.md reference",
+      "evidence": [
+        "26 Code mode turns detected (turns 16-66)",
+        "No plan files found in visible files or open tabs"
+      ],
+      "recommendation": "Create PLAN.md or TODO.md before starting Code mode. Use 'update_todo_list' tool or switch to Plan mode with '/plan' to document your approach before coding."
+    },
+    {
+      "name": "Cost-Based Drift (Single Turn)",
+      "severity": "critical",
+      "description": "Turn(s) with cost increase >$0.30",
+      "evidence": [
+        "Turn 8: $0.31 cost increase",
+        "Turn 10: $0.31 cost increase",
+        "Turn 12: $0.42 cost increase",
+        "Turn 14: $0.53 cost increase",
+        "Turn 16: $0.64 cost increase",
+        "Turn 18: $0.73 cost increase",
+        "Turn 20: $0.82 cost increase",
+        "Turn 22: $0.92 cost increase",
+        "Turn 24: $1.02 cost increase",
+        "Turn 26: $1.12 cost increase",
+        "Turn 28: $1.23 cost increase",
+        "Turn 30: $1.34 cost increase",
+        "Turn 32: $1.45 cost increase",
+        "Turn 34: $1.56 cost increase",
+        "Turn 36: $1.68 cost increase",
+        "Turn 38: $1.80 cost increase",
+        "Turn 40: $1.92 cost increase",
+        "Turn 42: $2.05 cost increase",
+        "Turn 44: $2.18 cost increase",
+        "Turn 46: $2.31 cost increase",
+        "Turn 48: $2.44 cost increase",
+        "Turn 50: $2.58 cost increase",
+        "Turn 52: $2.72 cost increase",
+        "Turn 54: $2.87 cost increase",
+        "Turn 56: $3.02 cost increase",
+        "Turn 58: $3.17 cost increase",
+        "Turn 60: $3.32 cost increase",
+        "Turn 62: $3.48 cost increase",
+        "Turn 64: $3.65 cost increase",
+        "Turn 66: $3.81 cost increase"
+      ],
+      "recommendation": "High cost suggests unfocused task or missing decomposition. Break work into smaller phases. Use '/review' to checkpoint progress. Consider switching to Plan mode to refine approach."
+    },
+    {
+      "name": "Cost-Based Drift (Session)",
+      "severity": "critical",
+      "description": "Session total cost >$1.50",
+      "evidence": [
+        "Total session cost: $3.81 across 68 turns",
+        "Note: Session contains negative cost deltas (missing environment blocks)"
+      ],
+      "recommendation": "High session cost suggests unfocused work or missing phase breaks. Export session history and start a new focused session for the next phase."
+    },
+    {
+      "name": "Missing /review Command",
+      "severity": "medium",
+      "description": "Code session with >5 file edits without review",
+      "evidence": [
+        "6 file edits detected (write_to_file: 1, insert_content: 3, apply_diff: 2)",
+        "No /review command found in user messages"
+      ],
+      "recommendation": "Run '/review' after making >5 file changes to catch bugs early. Code review reduces rework and improves quality."
+    },
+    {
+      "name": "Tool Use Errors",
+      "severity": "high",
+      "description": "[ERROR] messages following tool invocations",
+      "evidence": [
+        "Turn 2: [ERROR] after read_file in Turn 1",
+        "Turn 4: [ERROR] after read_file in Turn 3",
+        "Turn 8: [ERROR] after read_file in Turn 7",
+        "Turn 38: [ERROR] after search_files in Turn 37",
+        "Turn 50: [ERROR] after execute_command in Turn 49"
+      ],
+      "recommendation": "Tool errors indicate unclear requirements or incorrect parameters. Review tool documentation and task context before retrying. Use 'ask_followup_question' if requirements are ambiguous."
+    }
+  ],
+  "summary": {
+    "overall_score": 7,
+    "passing_metrics_count": 2,
+    "total_metrics_count": 5,
+    "anti_pattern_count_by_severity": {
+      "critical": 2,
+      "high": 2,
+      "medium": 1,
+      "low": 0
+    },
+    "total_anti_patterns": 5
+  }
+}

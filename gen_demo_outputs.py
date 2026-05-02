@@ -13,8 +13,8 @@ SESSIONS = [
     "phase-2",
     "phase-3",
     "phase-planning",
-    "sample-session-01",
-    "sample-session-02",
+    "phase-4a-renderer-polish",
+    "phase-4b-self-coached",
 ]
 
 def run_bob_coach(session_path: Path, compact: bool = False, json_output: bool = False) -> str:
@@ -23,7 +23,7 @@ def run_bob_coach(session_path: Path, compact: bool = False, json_output: bool =
     if compact:
         cmd.append("--compact")
     if json_output:
-        cmd.append("--json")
+        cmd.extend(["--format", "json"])
 
     result = subprocess.run(
         cmd,

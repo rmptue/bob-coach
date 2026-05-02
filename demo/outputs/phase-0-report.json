@@ -1,0 +1,125 @@
+{
+  "version": "1.0.0",
+  "session_metadata": {
+    "filename": "phase-0.md",
+    "total_cost": 2.41,
+    "turn_count": 62,
+    "user_turns": 31,
+    "assistant_turns": 31,
+    "duration_minutes": 36,
+    "workspace": "c:/Users/Joshua/Documents/VANTAGE/Projects/bob-coach",
+    "modes_used": [
+      "plan",
+      "code",
+      "advanced"
+    ]
+  },
+  "metrics": {
+    "plan_to_code_ratio": {
+      "value": 107.7,
+      "target": 20.0,
+      "unit": "percent",
+      "pass": true
+    },
+    "bobcoin_efficiency": {
+      "value": 1.3,
+      "target": 5.0,
+      "unit": "deliverables_per_0.1_dollars",
+      "pass": false
+    },
+    "conversation_count": {
+      "value": 31,
+      "target": 15,
+      "unit": "turns",
+      "pass": false
+    },
+    "slash_command_usage": {
+      "value": 0.0,
+      "target": 30.0,
+      "unit": "percent",
+      "pass": false
+    },
+    "error_rate": {
+      "value": 9.7,
+      "target": 10.0,
+      "unit": "percent",
+      "pass": true
+    }
+  },
+  "anti_patterns": [
+    {
+      "name": "Cost-Based Drift (Single Turn)",
+      "severity": "critical",
+      "description": "Turn(s) with cost increase >$0.30",
+      "evidence": [
+        "Turn 14: $0.31 cost increase",
+        "Turn 16: $0.37 cost increase",
+        "Turn 18: $0.44 cost increase",
+        "Turn 20: $0.52 cost increase",
+        "Turn 22: $0.60 cost increase",
+        "Turn 24: $0.69 cost increase",
+        "Turn 26: $0.78 cost increase",
+        "Turn 28: $0.87 cost increase",
+        "Turn 30: $0.94 cost increase",
+        "Turn 32: $1.03 cost increase",
+        "Turn 34: $1.11 cost increase",
+        "Turn 36: $1.19 cost increase",
+        "Turn 38: $1.28 cost increase",
+        "Turn 40: $1.36 cost increase",
+        "Turn 42: $1.45 cost increase",
+        "Turn 44: $1.54 cost increase",
+        "Turn 46: $1.63 cost increase",
+        "Turn 48: $1.72 cost increase",
+        "Turn 50: $1.82 cost increase",
+        "Turn 52: $1.92 cost increase",
+        "Turn 54: $2.02 cost increase",
+        "Turn 56: $2.14 cost increase",
+        "Turn 58: $2.28 cost increase",
+        "Turn 60: $2.41 cost increase"
+      ],
+      "recommendation": "High cost suggests unfocused task or missing decomposition. Break work into smaller phases. Use '/review' to checkpoint progress. Consider switching to Plan mode to refine approach."
+    },
+    {
+      "name": "Cost-Based Drift (Session)",
+      "severity": "critical",
+      "description": "Session total cost >$1.50",
+      "evidence": [
+        "Total session cost: $2.41 across 62 turns",
+        "Note: Session contains negative cost deltas (missing environment blocks)"
+      ],
+      "recommendation": "High session cost suggests unfocused work or missing phase breaks. Export session history and start a new focused session for the next phase."
+    },
+    {
+      "name": "Missing /review Command",
+      "severity": "medium",
+      "description": "Code session with >5 file edits without review",
+      "evidence": [
+        "9 file edits detected (apply_diff: 1, write_to_file: 8)",
+        "No /review command found in user messages"
+      ],
+      "recommendation": "Run '/review' after making >5 file changes to catch bugs early. Code review reduces rework and improves quality."
+    },
+    {
+      "name": "Tool Use Errors",
+      "severity": "high",
+      "description": "[ERROR] messages following tool invocations",
+      "evidence": [
+        "Turn 2: [ERROR] after read_file in Turn 1",
+        "Turn 18: [ERROR] after ask_followup_question in Turn 17"
+      ],
+      "recommendation": "Tool errors indicate unclear requirements or incorrect parameters. Review tool documentation and task context before retrying. Use 'ask_followup_question' if requirements are ambiguous."
+    }
+  ],
+  "summary": {
+    "overall_score": 12,
+    "passing_metrics_count": 2,
+    "total_metrics_count": 5,
+    "anti_pattern_count_by_severity": {
+      "critical": 2,
+      "high": 1,
+      "medium": 1,
+      "low": 0
+    },
+    "total_anti_patterns": 4
+  }
+}
