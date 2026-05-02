@@ -78,4 +78,18 @@ class Session:
     file_edits: int = 0                                              # Count of write_to_file/apply_diff/insert_content
     slash_commands: list[str] = field(default_factory=list)          # Extracted slash commands (e.g., ["review", "plan"])
 
+@dataclass
+class AntiPattern:
+    """Represents a detected anti-pattern with evidence and recommendation.
+    
+    All fields are required to ensure actionable, explainable findings.
+    Used by Phase 2 detectors to report issues found in sessions.
+    """
+    name: str                                      # Anti-pattern identifier (e.g., "Missing Plan File")
+    severity: Literal["low", "medium", "high", "critical"]  # Impact level
+    description: str                               # What the anti-pattern is
+    evidence: list[str]                            # Turn indices, excerpts, counts (machine-verifiable)
+    recommendation: str                            # Specific action to fix (not vague advice)
+
+
 # Made with Bob
